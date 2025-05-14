@@ -1,39 +1,87 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Humzah's Portfolio</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f7f7f7;
-      color: #333;
-      text-align: center;
-      padding: 50px;
+  <title>Humzah | Developer Portfolio</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.4.1/dist/tailwind.min.css" rel="stylesheet">
+  <script>
+    function toggleDarkMode() {
+      document.documentElement.classList.toggle('dark');
     }
-    h1 {
-      color: #0057e7;
-    }
-    a {
-      color: #007acc;
-      text-decoration: none;
-    }
-    .project {
-      margin-top: 30px;
-    }
-  </style>
+  </script>
 </head>
-<body>
-  <h1>Welcome to Humzah's Portfolio</h1>
-  <p>This is a test page hosted on GitHub Pages.</p>
 
-  <div class="project">
-    <h2>🚀 Example Project</h2>
-    <p>Description of a cool project will go here.</p>
-    <a href="#">View Project</a>
-  </div>
+<body class="bg-white text-gray-900 dark:bg-gray-900 dark:text-white transition-colors duration-500">
+  <header class="py-6 px-4 border-b border-gray-200 dark:border-gray-700 flex justify-between items-center max-w-6xl mx-auto">
+    <h1 class="text-2xl font-extrabold text-indigo-600 dark:text-indigo-400 tracking-tight">Humzah.dev</h1>
+    <button onclick="toggleDarkMode()" class="text-sm px-4 py-1 border border-indigo-500 text-indigo-600 dark:text-indigo-300 rounded hover:bg-indigo-100 dark:hover:bg-indigo-800 transition">
+      Toggle Dark Mode
+    </button>
+  </header>
 
-  <p style="margin-top: 50px;">More coming soon...</p>
+  <main class="px-4 max-w-6xl mx-auto py-10 space-y-20">
+    
+    <!-- Hero -->
+    <section class="text-center">
+      <h2 class="text-4xl font-bold mb-2">Hey, I’m Humzah 👨‍💻</h2>
+      <p class="text-gray-600 dark:text-gray-300 text-lg">Creative developer, code artist & visual thinker. Building cool things with clean code.</p>
+    </section>
+
+    <!-- Projects -->
+    <section>
+      <h3 class="text-3xl font-semibold mb-6 border-b pb-2 border-gray-300 dark:border-gray-600">🚀 Projects</h3>
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="border p-5 rounded hover:shadow-xl hover:-translate-y-1 transform transition duration-300">
+          <h4 class="text-xl font-bold text-indigo-600 dark:text-indigo-400">NFT Generator</h4>
+          <p class="text-gray-700 dark:text-gray-300 mt-2">Python script that generates rare NFT collections using component-based logic.</p>
+        </div>
+        <div class="border p-5 rounded hover:shadow-xl hover:-translate-y-1 transform transition duration-300">
+          <h4 class="text-xl font-bold text-indigo-600 dark:text-indigo-400">CarWay Booking Site</h4>
+          <p class="text-gray-700 dark:text-gray-300 mt-2">PHP & MySQL web app to book car repairs. Boosted UX and admin tracking.</p>
+        </div>
+        <div class="border p-5 rounded hover:shadow-xl hover:-translate-y-1 transform transition duration-300">
+          <h4 class="text-xl font-bold text-indigo-600 dark:text-indigo-400">Java 2D Game</h4>
+          <p class="text-gray-700 dark:text-gray-300 mt-2">OOP-based adventure game with animation, scoring, and sound.</p>
+        </div>
+        <div class="border p-5 rounded hover:shadow-xl hover:-translate-y-1 transform transition duration-300">
+          <h4 class="text-xl font-bold text-indigo-600 dark:text-indigo-400">Type 2 Diabetes Data Viz</h4>
+          <p class="text-gray-700 dark:text-gray-300 mt-2">Explored public health datasets using Python. Created accessible, interactive visuals.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- GitHub Static Previews -->
+    <section>
+      <h3 class="text-3xl font-semibold mb-6 border-b pb-2 border-gray-300 dark:border-gray-600">📂 GitHub Previews</h3>
+      <ul class="space-y-4">
+        <li class="border p-4 rounded hover:bg-gray-100 dark:hover:bg-gray-800 transition">
+          <a href="https://github.com/YOUR_USERNAME/nft-generator" class="text-indigo-600 dark:text-indigo-400 font-semibold hover:underline">NFT Generator Repo</a>
+          <p class="text-sm text-gray-600 dark:text-gray-400">Python repo for NFT component-based random generation.</p>
+        </li>
+        <li class="border p-4 rounded hover:bg-gray-100 dark:hover:bg-gray-800 transition">
+          <a href="https://github.com/YOUR_USERNAME/carway" class="text-indigo-600 dark:text-indigo-400 font-semibold hover:underline">CarWay PHP Site</a>
+          <p class="text-sm text-gray-600 dark:text-gray-400">MySQL-powered PHP site for service bookings and reviews.</p>
+        </li>
+      </ul>
+    </section>
+
+    <!-- Blog / Personal Section -->
+    <section>
+      <h3 class="text-3xl font-semibold mb-6 border-b pb-2 border-gray-300 dark:border-gray-600">🧠 Blog & Thoughts</h3>
+      <article class="mb-6">
+        <h4 class="text-xl font-bold text-indigo-600 dark:text-indigo-400">Why I Code</h4>
+        <p class="text-gray-700 dark:text-gray-300 mt-2">Because it lets me build anything from scratch. I love seeing an idea go from "meh" to "woah" just by writing clean, smart code.</p>
+      </article>
+      <article>
+        <h4 class="text-xl font-bold text-indigo-600 dark:text-indigo-400">Top 3 Lessons From Uni</h4>
+        <p class="text-gray-700 dark:text-gray-300 mt-2">1. Start simple. 2. Fail fast and fix. 3. Always make it fun — if it isn’t fun, you’re doing it wrong.</p>
+      </article>
+    </section>
+  </main>
+
+  <footer class="text-center text-sm text-gray-500 dark:text-gray-400 py-6 border-t border-gray-200 dark:border-gray-700">
+    Made with 🔥 by Humzah · <a href="https://github.com/YOUR_USERNAME" class="underline hover:text-indigo-500">GitHub</a>
+  </footer>
 </body>
 </html>

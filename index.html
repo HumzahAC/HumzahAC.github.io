@@ -1,202 +1,93 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en" class="dark scroll-smooth">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Humzah | Portfolio</title>
 
-  <!-- Tailwind config for dark mode -->
+  <!-- Tailwind config (dark mode enabled by default via class) -->
   <script>
     tailwind.config = {
-      darkMode: 'class'
+      darkMode: 'class',
+      theme: {
+        extend: {}
+      }
     }
   </script>
 
   <!-- Tailwind CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+  <link rel="stylesheet" type="text/css" href="style.css">
 
-  <style>
-    body {
-      font-family: 'Inter', sans-serif;
-      overflow-x: hidden;
-      margin: 0;
-      cursor: none;
-    }
-    
-    #dot-canvas {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
-      pointer-events: none;
-    }
-    
-    #cursor {
-      position: fixed;
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-      background: rgba(139, 92, 246, 0.2);
-      transform: translate(-50%, -50%);
-      pointer-events: none;
-      z-index: 9999;
-      mix-blend-mode: screen;
-      display: none;
-    }
-  </style>
+
 </head>
 
-<body class="bg-black text-white">
-  <!-- Canvas for dots -->
+<body class="bg-slate-900 text-slate-100">
   <canvas id="dot-canvas"></canvas>
-  
-  <!-- Custom Cursor -->
   <div id="cursor"></div>
 
-  <div class="flex min-h-screen">
-    <!-- Left: Sticky Hero -->
-    <aside class="w-1/5 hidden backdrop-blur-sm bg-white/0 lg:flex flex-col justify-center items-start p-10 bg-white dark:bg-black/0 backdrop-blur-sm sticky top-0 h-screen">
-      <h1 class="text-4xl font-extrabold text-indigo-600 dark:text-indigo-400">Humzah 👨‍💻</h1>
+  <div class="flex min-h-screen flex-col lg:flex-row">
+    <aside class="w-full lg:w-1/6 flex flex-col items-start p-10 lg:sticky top-0 h-screen glass-panel">
+      <h1 class="text-4xl font-extrabold text-indigo-400">Humzah 👨‍💻</h1>
       See Projects
       <p class="text-lg mt-4 max-w-xs">
         I'm a creative developer who loves building clean, functional, and expressive web applications.
       </p>
-      <button onclick="toggleDarkMode()" class="mt-6 px-4 py-2 border border-indigo-500 rounded hover:bg-indigo-100 dark:hover:bg-indigo-800 transition text-sm">
-        Toggle Theme
-      </button>
     </aside>
 
-    <!-- Right: Scrollable Content -->
-    <main class="w-full lg:w-4/5 p-6 lg:p-10 space-y-16 overflow-y-auto">
-      <!-- Your content sections here -->
-      <section id="about">
-        <h2 class="text-2xl font-semibold mb-4">💡 About Me</h2>
-        <p class="text-sm leading-relaxed mb-4">
-          I'm a passionate Computer Science graduate who thrives on transforming abstract ideas into tangible digital experiences.
-          From data visualizations to dynamic games, I combine technical depth with creativity and design sensibility.
-        </p>
+    <main class="w-full lg:w-5/6 p-6 lg:p-10 space-y-16 overflow-y-auto">
+
       </section>
-      <section id="projects">
+
+      
         <h2 class="text-2xl font-semibold mb-4">🚀 Projects</h2>
-        <div class="space-y-10 text-sm">
-          <div>
-            <h3 class="font-bold text-indigo-500 dark:text-indigo-400 text-lg">NFT Generator</h3>
-            <p class="text-gray-600 dark:text-gray-400 mt-2">
+        <div class="grid md:grid-cols-2 gap-6 text-sm">
+          <!-- Video Project Panel -->
+          <div class="glass-panel p-6 rounded-lg">
+            <video 
+              muted 
+              loop 
+              playsinline 
+              class="w-full rounded-lg shadow-lg hover:cursor-pointer"
+              onmouseover="this.play()" 
+              onmouseout="this.pause(); this.currentTime = 0;"
+            >
+              <source src="assets/Days gone.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+            <h3 class="font-bold text-indigo-400 text-lg mt-4">NFT Generator</h3>
+            <p class="text-slate-400 mt-2">
               Python tool that generates rare NFT collections using layered image logic and metadata automation.
             </p>
           </div>
+        
+          <!-- NFT Python Code Panel -->
+          <div class="glass-panel p-6 rounded-lg">
+            <h3 class="font-bold text-indigo-400 text-lg">Behind the Scenes</h3>
+            <p class="text-slate-400 mt-2">
+              The NFT generator was built using Python and the Pillow library to programmatically combine image layers (like backgrounds, characters, accessories) into thousands of unique outputs.
+            </p>
+            <p class="text-slate-400 mt-4">
+              It also generates metadata in JSON format for each NFT to be compatible with platforms like OpenSea. The system includes rarity weighting, batch preview generation, and export tools.
+            </p>
+            <p class="text-slate-400 mt-4">
+              You can find the code on 
+              <a href="https://github.com/YOUR_USERNAME/nft-generator" class="text-indigo-400 underline hover:text-indigo-300">GitHub here</a>.
+            </p>
+          </div>
         </div>
-      </section>
-      <footer class="text-xs text-gray-500 dark:text-gray-400 pt-20 pb-6">
+        
+        
+        
+      
+
+      <footer class="text-xs text-slate-400 pt-20 pb-6">
         © 2025 Humzah. Built with Tailwind & ✨
       </footer>
     </main>
   </div>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      // Canvas setup
-      const canvas = document.getElementById('dot-canvas');
-      const ctx = canvas.getContext('2d');
-      const cursor = document.getElementById('cursor');
-      
-      // Configuration
-      const dotSpacing = 25; // pixels between dots
-      const dotRadius = 2; // size of dots
-      const repulsionRadius = 100; // effect radius
-      const maxDistance = 15; // maximum dot displacement
-      
-      // State
-      let dots = [];
-      let mouseX = -100;
-      let mouseY = -100;
-      let canvasWidth = window.innerWidth;
-      let canvasHeight = window.innerHeight;
-      
-      // Initialize canvas
-      function initCanvas() {
-        canvasWidth = window.innerWidth;
-        canvasHeight = window.innerHeight;
-        canvas.width = canvasWidth;
-        canvas.height = canvasHeight;
-        
-        // Create dots
-        dots = [];
-        const cols = Math.ceil(canvasWidth / dotSpacing);
-        const rows = Math.ceil(canvasHeight / dotSpacing);
-        
-        for (let y = 0; y < rows; y++) {
-          for (let x = 0; x < cols; x++) {
-            dots.push({
-              x: x * dotSpacing + dotSpacing/2,
-              y: y * dotSpacing + dotSpacing/2,
-              originalX: x * dotSpacing + dotSpacing/2,
-              originalY: y * dotSpacing + dotSpacing/2,
-              color: (x + y) % 2 === 0 ? 
-                { r: 95, g: 10, b: 123, a: 0.6 } : 
-                { r: 64, g: 1, b: 96, a: 0.8 }
-            });
-          }
-        }
-      }
-      
-      // Draw all dots
-      function drawDots() {
-        ctx.clearRect(0, 0, canvasWidth, canvasHeight);
-        
-        dots.forEach(dot => {
-          // Calculate distance to mouse
-          const dx = mouseX - dot.originalX;
-          const dy = mouseY - dot.originalY;
-          const distance = Math.sqrt(dx * dx + dy * dy);
-          
-          // Calculate displacement if within repulsion radius
-          if (distance < repulsionRadius) {
-            const force = (repulsionRadius - distance) / repulsionRadius;
-            const angle = Math.atan2(dy, dx);
-            dot.x = dot.originalX + Math.cos(angle) * force * maxDistance;
-            dot.y = dot.originalY + Math.sin(angle) * force * maxDistance;
-          } else {
-            // Return to original position
-            dot.x += (dot.originalX - dot.x) * 0.1;
-            dot.y += (dot.originalY - dot.y) * 0.1;
-          }
-          
-          // Draw dot
-          ctx.beginPath();
-          ctx.arc(dot.x, dot.y, dotRadius, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(${dot.color.r}, ${dot.color.g}, ${dot.color.b}, ${dot.color.a})`;
-          ctx.fill();
-        });
-        
-        requestAnimationFrame(drawDots);
-      }
-      
-      // Mouse movement handler
-      document.addEventListener('mousemove', (e) => {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
-        cursor.style.left = `${mouseX}px`;
-        cursor.style.top = `${mouseY}px`;
-        cursor.style.display = 'block';
-      });
-      
-      // Handle window resize
-      window.addEventListener('resize', () => {
-        initCanvas();
-      });
-      
-      // Start animation
-      initCanvas();
-      drawDots();
-    });
-    
-    function toggleDarkMode() {
-      document.documentElement.classList.toggle('dark');
-    }
-  </script>
+  <!-- The animated canvas and cursor script remain unchanged -->
+  <script src="scripts.js"></script>
 </body>
 </html>

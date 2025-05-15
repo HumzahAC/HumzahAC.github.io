@@ -14,23 +14,55 @@
 
   <!-- Tailwind CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
 
-  <script>
-    function toggleDarkMode() {
-      document.documentElement.classList.toggle('dark');
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+      margin: 0;
+      cursor: none;
     }
-  </script>
+    
+    #dot-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      pointer-events: none;
+    }
+    
+    #cursor {
+      position: fixed;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: rgba(139, 92, 246, 0.2);
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      z-index: 9999;
+      mix-blend-mode: screen;
+      display: none;
+    }
+  </style>
 </head>
 
+<body class="bg-black text-white">
+  <!-- Canvas for dots -->
+  <canvas id="dot-canvas"></canvas>
+  
+  <!-- Custom Cursor -->
+  <div id="cursor"></div>
 
-<body class="bg-white text-gray-900 dark:bg-black dark:text-white transition duration-500">
   <div class="flex min-h-screen">
-
     <!-- Left: Sticky Hero -->
-    <aside class="w-1/3 hidden lg:flex flex-col justify-center items-start p-10 bg-white dark:bg-black sticky top-0 h-screen">
+    <aside class="w-1/5 hidden backdrop-blur-sm bg-white/0 lg:flex flex-col justify-center items-start p-10 bg-white dark:bg-black/0 backdrop-blur-sm sticky top-0 h-screen">
       <h1 class="text-4xl font-extrabold text-indigo-600 dark:text-indigo-400">Humzah 👨‍💻</h1>
+      See Projects
       <p class="text-lg mt-4 max-w-xs">
-        I’m a creative developer who loves building clean, functional, and expressive web applications.
+        I'm a creative developer who loves building clean, functional, and expressive web applications.
       </p>
       <button onclick="toggleDarkMode()" class="mt-6 px-4 py-2 border border-indigo-500 rounded hover:bg-indigo-100 dark:hover:bg-indigo-800 transition text-sm">
         Toggle Theme
@@ -38,38 +70,17 @@
     </aside>
 
     <!-- Right: Scrollable Content -->
-    <main class="w-full lg:w-2/3 p-6 lg:p-10 space-y-16 overflow-y-auto">
-
-      <!-- About Section -->
+    <main class="w-full lg:w-4/5 p-6 lg:p-10 space-y-16 overflow-y-auto">
+      <!-- Your content sections here -->
       <section id="about">
         <h2 class="text-2xl font-semibold mb-4">💡 About Me</h2>
         <p class="text-sm leading-relaxed mb-4">
           I'm a passionate Computer Science graduate who thrives on transforming abstract ideas into tangible digital experiences.
           From data visualizations to dynamic games, I combine technical depth with creativity and design sensibility.
         </p>
-        <p class="text-sm leading-relaxed mb-4 text-gray-600 dark:text-gray-400">
-          Over the past few years, I’ve honed my skills across multiple programming languages and frameworks. I believe in building meaningful software that’s both beautiful and efficient.
-          My journey began with simple static websites and evolved into complex backend systems, full-stack platforms, and data visualisation projects.
-        </p>
-        <p class="text-sm leading-relaxed mb-4 text-gray-600 dark:text-gray-400">
-          Whether I’m building an API from scratch or refining a frontend component, I bring focus and craftsmanship to each step of the process. I’m not just writing code — I’m designing user experiences, solving real-world problems, and telling stories through interaction.
-        </p>
-        <p class="text-sm leading-relaxed mb-4 text-gray-600 dark:text-gray-400">
-          Here are a few things I’m especially passionate about:
-        </p>
-        <ul class="list-disc list-inside text-sm text-gray-600 dark:text-gray-400">
-          <li>Turning data into stories using visualisation libraries</li>
-          <li>Writing expressive, self-documenting code</li>
-          <li>Learning from open-source projects</li>
-          <li>Collaborating with designers to build delightful experiences</li>
-          <li>Making tech more accessible to everyone</li>
-        </ul>
       </section>
-
-      <!-- Projects Section -->
       <section id="projects">
         <h2 class="text-2xl font-semibold mb-4">🚀 Projects</h2>
-
         <div class="space-y-10 text-sm">
           <div>
             <h3 class="font-bold text-indigo-500 dark:text-indigo-400 text-lg">NFT Generator</h3>
@@ -77,32 +88,115 @@
               Python tool that generates rare NFT collections using layered image logic and metadata automation.
             </p>
           </div>
-          <div>
-            <h3 class="font-bold text-indigo-500 dark:text-indigo-400 text-lg">CarWay Booking Site</h3>
-            <p class="text-gray-600 dark:text-gray-400 mt-2">
-              PHP & MySQL-based site for car service centers to manage appointments and view analytics.
-            </p>
-          </div>
-          <div>
-            <h3 class="font-bold text-indigo-500 dark:text-indigo-400 text-lg">Java 2D Game</h3>
-            <p class="text-gray-600 dark:text-gray-400 mt-2">
-              A top-down adventure game written in Java using OOP principles, animations, and scoring.
-            </p>
-          </div>
-          <div>
-            <h3 class="font-bold text-indigo-500 dark:text-indigo-400 text-lg">Type 2 Diabetes Visualisation</h3>
-            <p class="text-gray-600 dark:text-gray-400 mt-2">
-              Explored UK health data using Python. Built interactive dashboards with Plotly and Pandas.
-            </p>
-          </div>
         </div>
       </section>
-
-      <!-- Footer -->
       <footer class="text-xs text-gray-500 dark:text-gray-400 pt-20 pb-6">
         © 2025 Humzah. Built with Tailwind & ✨
       </footer>
     </main>
   </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Canvas setup
+      const canvas = document.getElementById('dot-canvas');
+      const ctx = canvas.getContext('2d');
+      const cursor = document.getElementById('cursor');
+      
+      // Configuration
+      const dotSpacing = 25; // pixels between dots
+      const dotRadius = 2; // size of dots
+      const repulsionRadius = 100; // effect radius
+      const maxDistance = 15; // maximum dot displacement
+      
+      // State
+      let dots = [];
+      let mouseX = -100;
+      let mouseY = -100;
+      let canvasWidth = window.innerWidth;
+      let canvasHeight = window.innerHeight;
+      
+      // Initialize canvas
+      function initCanvas() {
+        canvasWidth = window.innerWidth;
+        canvasHeight = window.innerHeight;
+        canvas.width = canvasWidth;
+        canvas.height = canvasHeight;
+        
+        // Create dots
+        dots = [];
+        const cols = Math.ceil(canvasWidth / dotSpacing);
+        const rows = Math.ceil(canvasHeight / dotSpacing);
+        
+        for (let y = 0; y < rows; y++) {
+          for (let x = 0; x < cols; x++) {
+            dots.push({
+              x: x * dotSpacing + dotSpacing/2,
+              y: y * dotSpacing + dotSpacing/2,
+              originalX: x * dotSpacing + dotSpacing/2,
+              originalY: y * dotSpacing + dotSpacing/2,
+              color: (x + y) % 2 === 0 ? 
+                { r: 95, g: 10, b: 123, a: 0.6 } : 
+                { r: 64, g: 1, b: 96, a: 0.8 }
+            });
+          }
+        }
+      }
+      
+      // Draw all dots
+      function drawDots() {
+        ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+        
+        dots.forEach(dot => {
+          // Calculate distance to mouse
+          const dx = mouseX - dot.originalX;
+          const dy = mouseY - dot.originalY;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+          
+          // Calculate displacement if within repulsion radius
+          if (distance < repulsionRadius) {
+            const force = (repulsionRadius - distance) / repulsionRadius;
+            const angle = Math.atan2(dy, dx);
+            dot.x = dot.originalX + Math.cos(angle) * force * maxDistance;
+            dot.y = dot.originalY + Math.sin(angle) * force * maxDistance;
+          } else {
+            // Return to original position
+            dot.x += (dot.originalX - dot.x) * 0.1;
+            dot.y += (dot.originalY - dot.y) * 0.1;
+          }
+          
+          // Draw dot
+          ctx.beginPath();
+          ctx.arc(dot.x, dot.y, dotRadius, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(${dot.color.r}, ${dot.color.g}, ${dot.color.b}, ${dot.color.a})`;
+          ctx.fill();
+        });
+        
+        requestAnimationFrame(drawDots);
+      }
+      
+      // Mouse movement handler
+      document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        cursor.style.left = `${mouseX}px`;
+        cursor.style.top = `${mouseY}px`;
+        cursor.style.display = 'block';
+      });
+      
+      // Handle window resize
+      window.addEventListener('resize', () => {
+        initCanvas();
+      });
+      
+      // Start animation
+      initCanvas();
+      drawDots();
+    });
+    
+    function toggleDarkMode() {
+      document.documentElement.classList.toggle('dark');
+    }
+  </script>
 </body>
 </html>

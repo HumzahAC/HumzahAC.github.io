@@ -7,6 +7,19 @@
       background-color: #0f172a;
     }
 
+    @keyframes scrollLeft {
+        0% {
+          transform: translateX(0%);
+        }
+        100% {
+          transform: translateX(-50%);
+        }
+      }
+    
+      .scroll-on-hover:hover .scroll-track {
+        animation: scrollLeft 10s linear infinite;
+      }
+
     #dot-canvas {
       position: fixed;
       top: 0;

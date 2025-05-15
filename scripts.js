@@ -64,47 +64,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
       clickEffects = clickEffects.filter(effect => {
         ctx.beginPath();
-        ctx.arc(effect.x, effect.y, effect.radius, 0, Math.PI * 2);
-        ctx.strokeStyle = effect.color.replace(/[\d\.]+\)$/, effect.alpha + ')');
-        ctx.lineWidth = 2;
-        ctx.stroke();
+        
 
-        effect.radius += 3;
-        effect.alpha -= 0.02;
-
-        return effect.radius < effect.maxRadius && effect.alpha > 0;
+    
       });
 
       dots.forEach(dot => {
         let forceX = 0;
         let forceY = 0;
 
-        const dx = mouseX - dot.originalX;
-        const dy = mouseY - dot.originalY;
-        const distance = Math.sqrt(dx * dx + dy * dy);
+       
 
-        if (distance < repulsionRadius) {
-          const force = (repulsionRadius - distance) / repulsionRadius;
-          const angle = Math.atan2(dy, dx);
-          forceX += Math.cos(angle) * force * maxDistance;
-          forceY += Math.sin(angle) * force * maxDistance;
-        }
+   
 
-        clickEffects.forEach(effect => {
-          const edx = effect.x - dot.originalX;
-          const edy = effect.y - dot.originalY;
-          const edistance = Math.sqrt(edx * edx + edy * edy);
-
-          if (edistance < effect.radius && effect.radius < clickRadius / 2) {
-            const force = (1 - edistance / effect.radius) * clickForce * (effect.alpha / 0.5);
-            const angle = Math.atan2(edy, edx);
-            forceX -= Math.cos(angle) * force;
-            forceY -= Math.sin(angle) * force;
-          }
-        });
-
-        dot.x += (dot.originalX + forceX - dot.x) * 0.1;
-        dot.y += (dot.originalY + forceY - dot.y) * 0.1;
+       
 
         ctx.beginPath();
         ctx.arc(dot.x, dot.y, dotRadius, 0, Math.PI * 2);
@@ -153,3 +126,5 @@ document.addEventListener('DOMContentLoaded', () => {
     initCanvas();
     draw();
   });
+
+  

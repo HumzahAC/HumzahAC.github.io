@@ -26,17 +26,84 @@
 
   <div class="flex min-h-screen flex-col lg:flex-row">
     <!-- Sidebar -->
-    <aside class="w-full lg:w-1/6 flex flex-col items-start p-6 sm:p-8 lg:p-10 lg:sticky top-0 lg:h-screen glass-panel">
-      <h1 class="text-4xl font-extrabold text-indigo-400">Humzah 👨‍💻</h1>
-      <p class="text-lg mt-4 max-w-xs">
-        I'm a creative developer who loves building clean, functional, and expressive web applications.
-      </p>
-    </aside>
+    <aside class="w-full shadow-[0_0_15px_4px_rgba(129,140,248,0.6)] lg:w-1/6 flex flex-col items-start p-6 sm:p-8 lg:p-10 lg:sticky top-0 lg:h-screen glass-panel space-y-8">
+
+  <!-- Identity -->
+  <div class="w-full">
+    <h1 class="text-3xl sm:text-4xl font-extrabold bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 text-transparent bg-clip-text">
+      Humzah 👨‍💻
+    </h1>
+    <p class="text-sm mt-2 text-slate-400 italic leading-snug">
+      Creative developer crafting code & visuals with flair.
+    </p>
+  </div>
+
+  <!-- Collapsible Sections -->
+  <div class="w-full space-y-4">
+
+    <!-- 🛠 Technical Skills -->
+    <details class="group border-l-2 border-indigo-400 pl-4 pr-2">
+      <summary class="cursor-pointer text-indigo-300 font-semibold text-base sm:text-sm hover:text-indigo-400 transition-all">
+        🛠 Technical Skills
+      </summary>
+      <ul class="mt-2 text-slate-300 text-sm sm:text-xs space-y-1 pl-2">
+        <li>JavaScript / React</li>
+        <li>HTML5, CSS3, Tailwind</li>
+        <li>Python / Flask</li>
+        <li>MongoDB, Firebase</li>
+        <li>Git, GitHub, CLI</li>
+      </ul>
+    </details>
+
+    <!-- 🧰 Tools -->
+    <details class="group border-l-2 border-indigo-400 pl-4 pr-2">
+      <summary class="cursor-pointer text-indigo-300 font-semibold text-base sm:text-sm hover:text-indigo-400 transition-all">
+        🧰 Tools & Platforms
+      </summary>
+      <ul class="mt-2 text-slate-300 text-sm sm:text-xs space-y-1 pl-2">
+        <li>Figma / Adobe XD</li>
+        <li>VS Code, Postman</li>
+        <li>Docker (basic)</li>
+      </ul>
+    </details>
+
+    <!-- 🎓 Certifications -->
+    <details class="group border-l-2 border-indigo-400 pl-4 pr-2">
+      <summary class="cursor-pointer text-indigo-300 font-semibold text-base sm:text-sm hover:text-indigo-400 transition-all">
+        🎓 Certifications
+      </summary>
+      <ul class="mt-2 text-slate-300 text-sm sm:text-xs space-y-1 pl-2">
+        <li>CS50 by Harvard</li>
+        <li>Meta Front-End Developer</li>
+      </ul>
+    </details>
+
+    <!-- 🧠 Languages & Soft Skills -->
+    <details class="group border-l-2 border-indigo-400 pl-4 pr-2">
+      <summary class="cursor-pointer text-indigo-300 font-semibold text-base sm:text-sm hover:text-indigo-400 transition-all">
+        🧠 Languages & Soft Skills
+      </summary>
+      <ul class="mt-2 text-slate-300 text-sm sm:text-xs space-y-1 pl-2">
+        <li>English 🇬🇧 | Urdu 🇵🇰</li>
+        <li>Teamwork & Creativity</li>
+        <li>Agile & Problem Solving</li>
+      </ul>
+    </details>
+  </div>
+
+  <!-- Footer / Availability -->
+  <div class="pt-6 border-t border-slate-700 w-full">
+    <p class="text-xs sm:text-[11px] text-slate-500 pt-4 leading-tight">
+      💌 <span class="text-indigo-400">Open to freelance & full-time roles</span>
+    </p>
+  </div>
+</aside>
+
 
     <!-- Main Content -->
     <main class="w-full lg:w-5/6 p-4 sm:p-6 lg:p-10 space-y-16 overflow-y-auto">
      <!-- Parent panel -->
-<div class="glass-panel p-6 rounded-lg">
+<div class="glass-panel shadow-[0_0_20px_rgba(99,102,241,0.6)] p-6 rounded-lg">
   <h3 class="font-bold text-indigo-400 text-xl mb-6">💻 Programming Languages</h3>
   
   <!-- Nested grid inside parent panel -->
@@ -46,8 +113,9 @@
 
 
         <!-- 😺 Cat NFT Panel -->
-        <div class="glass-panel p-6 rounded-lg h-[400px] flex flex-col justify-between">
-          <div class="overflow-hidden scroll-on-hover h-full rounded shadow-inner">
+         <a href="Showcats.html" class="block">
+<div class="glass-panel  p-6 rounded-lg h-[400px] flex flex-col justify-between 
+            hover:shadow-[0_0_15px_4px_rgba(129,140,248,0.6)] transition duration-300">          <div class="overflow-hidden scroll-on-hover h-full rounded shadow-inner">
             <div class="flex items-center h-full w-max scroll-track">
               <!-- Cat images -->
               <img src="assets/cat1.png" class="h-full w-auto mx-2 rounded" alt="Cat 1">
@@ -60,6 +128,7 @@
               <img src="assets/cat3.png" class="h-full w-auto mx-2 rounded" alt="Cat 3 dup">
             </div>
           </div>
+          
           <div class="mt-4">
             <h3 class="font-bold text-indigo-400 text-lg">😺 Cat NFT Preview</h3>
             <p class="text-slate-400 mt-1">
@@ -67,11 +136,11 @@
             </p>
           </div>
         </div>
-
-
-        <div class="glass-panel p-6 rounded-lg h-[400px] flex flex-col justify-between">
-          <div class="overflow-hidden scroll-on-hover h-full rounded shadow-inner">
-            <img src="assets/HappyFeet.png" class="h-full w-auto mx-2 rounded" alt="Cat 1">
+</a>
+<a href="Happyfeet.html" class="block">
+<div class="glass-panel p-6 rounded-lg h-[400px] flex flex-col justify-between 
+            hover:shadow-[0_0_15px_4px_rgba(129,140,248,0.6)] transition duration-300">          <div class="overflow-hidden h-full rounded shadow-inner">
+            <img src="assets/HappyFeet.png" class="w-full h-full object-cover rounded" alt="Cat 1">
           </div>
           <div class="mt-4">
             <h3 class="font-bold text-indigo-400 text-lg">HappyFeet</h3>
@@ -82,18 +151,19 @@
         </div>
       </div>
       </div>
-
+</a>
 
       <!-- Parent panel -->
-<div class="glass-panel p-6 rounded-lg">
+<div class="glass-panel shadow-[0_0_20px_rgba(99,102,241,0.6)] p-6 rounded-lg">
   <h3 class="font-bold text-indigo-400 text-xl mb-6">💻 Visulisations</h3>
   
   <!-- Nested grid inside parent panel -->
+   <a href="DaysGone.html" class="block">
   <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
     
     <!-- 🎥 Video Project Panel (Fixed) -->
-<div class="glass-panel p-6 rounded-lg h-[400px] flex flex-col">
-  <div class="h-[250px]">
+<div class="glass-panel p-6 rounded-lg h-[400px] flex flex-col justify-between 
+            hover:shadow-[0_0_15px_4px_rgba(129,140,248,0.6)] transition duration-300">  <div class="h-[250px]">
     <video 
       muted 
       loop 
@@ -102,7 +172,7 @@
       onmouseover="this.play()" 
       onmouseout="this.pause(); this.currentTime = 0;"
     >
-      <source src="assets/Days gone.mp4" type="video/mp4">
+      <source src="assets/Days gone.mp4" class="w-full h-full object-cover rounded" type="video/mp4">
       Your browser does not support the video tag.
     </video>
   </div>
@@ -113,20 +183,74 @@
     </p>
   </div>
 </div>
+</a>
 
+<a href="DaysGone.html" class="block">
+<div class="glass-panel p-6 rounded-lg h-[400px] flex flex-col justify-between 
+            hover:shadow-[0_0_15px_4px_rgba(129,140,248,0.6)] transition duration-300">          <div class="overflow-hidden h-full rounded shadow-inner">
+            <img src="assets/HappyFeet.png" class="w-full h-full object-cover rounded" alt="Cat 1">
+          </div>
+          <div class="mt-4">
+            <h3 class="font-bold text-indigo-400 text-lg">Factors of Diabetes Visulisations</h3>
+            <p class="text-slate-400 mt-1">
+              These cats are uniquely generated using Python with weighted rarity for traits like hats, colors, and more.
+            </p>
+          </div>
+        </div>
+   </a>
 
+  </div>
+</div>
+
+      <!-- Parent panel -->
+<div class="glass-panel shadow-[0_0_20px_rgba(99,102,241,0.6)] p-6 rounded-lg">
+  <h3 class="font-bold text-indigo-400 text-xl mb-6">💻 Web Development</h3>
+  
+  <!-- Nested grid inside parent panel -->
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    
+    <!-- 🎥 Video Project Panel (Fixed) -->
+
+    <a href="bidlow.html">
+<div class="glass-panel p-6 rounded-lg h-[400px] flex flex-col justify-between 
+            hover:shadow-[0_0_15px_4px_rgba(129,140,248,0.6)] transition duration-300">          <div class="overflow-hidden h-full rounded shadow-inner">
+            <img src="assets/bidlow.png" class="w-full h-full object-cover rounded" alt="Cat 1">
+          </div>
+          <div class="mt-4">
+            <h3 class="font-bold text-indigo-400 text-lg">Factors of Diabetes Visulisations</h3>
+            <p class="text-slate-400 mt-1">
+              These cats are uniquely generated using Python with weighted rarity for traits like hats, colors, and more.
+            </p>
+          </div>
+        </div>
+</a>
+
+<a href="Carway.html">
+<div class="glass-panel p-6 rounded-lg h-[400px] flex flex-col justify-between 
+            hover:shadow-[0_0_15px_4px_rgba(129,140,248,0.6)] transition duration-300">          <div class="overflow-hidden h-full rounded shadow-inner">
+            <img src="assets/CarWay.png" class="w-full h-full object-cover rounded" alt="Cat 1">
+          </div>
+          <div class="mt-4">
+            <h3 class="font-bold text-indigo-400 text-lg">Factors of Diabetes Visulisations</h3>
+            <p class="text-slate-400 mt-1">
+              These cats are uniquely generated using Python with weighted rarity for traits like hats, colors, and more.
+            </p>
+          </div>
+        </div>
    
-
+</a>
   </div>
 </div>
 
-  </div>
-</div>
 
-
-      <footer class="text-xs text-slate-400 pt-20 pb-6">
+<footer class="text-xs text-slate-400 pt-20 pb-6">
         © 2025 Humzah. Built with Tailwind & ✨
       </footer>
+  </div>
+</div>
+
+
+      
     </main>
   </div>
 

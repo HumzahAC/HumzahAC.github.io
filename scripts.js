@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const ctx = canvas.getContext('2d');
     const cursor = document.getElementById('cursor');
 
-    const dotSpacing = 25;
+    const dotSpacing = 75;
     const dotRadius = 2;
     const repulsionRadius = 100;
     const maxDistance = 15;
@@ -35,29 +35,32 @@ document.addEventListener('DOMContentLoaded', () => {
             y: y * dotSpacing + dotSpacing / 2,
             originalX: x * dotSpacing + dotSpacing / 2,
             originalY: y * dotSpacing + dotSpacing / 2,
-            color: (x + y) % 2 === 0 ?
-              { r: 95, g: 10, b: 123, a: 0.6 } :
-              { r: 64, g: 1, b: 96, a: 0.8 }
+color: (x + y) % 2 === 0
+  ? { r: 160, g: 90, b: 30, a: 0.4 }   // muted bronze
+  : { r: 120, g: 70, b: 20, a: 0.5 }   // deep rust
+
+
+
           });
         }
       }
     }
 
-    function createClickEffect(x, y) {
-      clickEffects.push({
-        x: x,
-        y: y,
-        radius: 5,
-        maxRadius: clickRadius,
-        alpha: 0.5,
-        color: `rgba(139, 92, 246, ${Math.random() * 0.5 + 0.3})`
-      });
+    // function createClickEffect(x, y) {
+    //   clickEffects.push({
+    //     x: x,
+    //     y: y,
+    //     radius: 5,
+    //     maxRadius: clickRadius,
+    //     alpha: 0.5,
+    //     color: `rgba(139, 92, 246, ${Math.random() * 0.5 + 0.3})`
+    //   });
 
-      cursor.classList.add('click-effect');
-      setTimeout(() => {
-        cursor.classList.remove('click-effect');
-      }, 300);
-    }
+    //   cursor.classList.add('click-effect');
+    //   setTimeout(() => {
+    //     cursor.classList.remove('click-effect');
+    //   }, 300);
+    // }
 
     function draw() {
       ctx.clearRect(0, 0, canvasWidth, canvasHeight);

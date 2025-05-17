@@ -4,7 +4,7 @@
       overflow-x: hidden;
       margin: 0;
       cursor: none;
-      background-color: #0f172a;
+      background-color: #000000;
     }
 
     @keyframes scrollLeft {
@@ -41,22 +41,23 @@
       }
       
 
-    #cursor {
-        position: fixed;
-        width: 30px;
-        height: 30px;
-        border-radius: 50%;
-        background: rgba(139, 92, 246, 0.6); /* Soft purple glow base */
-        transform: translate(-50%, -50%);
-        pointer-events: none;
-        z-index: 9999;
-        mix-blend-mode: screen;
-        transition: transform 0.1s ease-out;
-        box-shadow:
-          0 0 8px rgba(139, 92, 246, 0.8),
-          0 0 15px rgba(139, 92, 246, 0.6),
-          0 0 30px rgba(139, 92, 246, 0.4);
-      }
+#cursor {
+  position: fixed;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: rgba(255, 140, 0, 0.4); /* Soft amber base */
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 9999;
+  mix-blend-mode: screen;
+  transition: transform 0.1s ease-out;
+  box-shadow:
+    0 0 8px rgba(255, 140, 0, 0.5),
+    0 0 15px rgba(255, 90, 0, 0.4),
+    0 0 25px rgba(255, 60, 0, 0.3);
+}
+
       
 
     .click-effect {
@@ -68,16 +69,11 @@
     .glass-panel {
       backdrop-filter: blur(2px);
       -webkit-backdrop-filter: blur(2px);
-      background-color: rgba(15, 23, 42, 0);
+      background-color: 000000;
       border: 2px solid rgba(255, 255, 255, 0.03);
     }
 
-    .glass-button {
-      backdrop-filter: blur(2px);
-      -webkit-backdrop-filter: blur(2px);
-      background-color: rgba(15, 23, 42, 0);
-      border: 1px solid rgba(255, 255, 255, 0.04);
-    }
+
 
     @media (max-width: 1023px) {
       .flex.min-h-screen {

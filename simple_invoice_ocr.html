@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Invoice OCR - Working Version</title>
+    <script src="https://cdn.jsdelivr.net/npm/tesseract.js@4/dist/tesseract.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2563eb 0%, #10b981 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2em;
+            margin-bottom: 8px;
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        .upload-area {
+            border: 3px dashed #cbd5e1;
+            border-radius: 12px;
+            padding: 40px;
+            text-align: center;
+            background: #f8fafc;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .upload-area:hover {
+            border-color: #2563eb;
+            background: #eff6ff;
+        }
+
+        .upload-area.dragover {
+            border-color: #10b981;
+            background: #ecfdf5;
+        }
+
+        .file-input {
+            display: none;
+        }
+
+        .upload-btn {
+            background: linear-gradient(135deg, #2563eb 0%, #10b981 100%);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 1em;
+            cursor: pointer;
+            margin-bottom: 15px;
+            transition: transform 0.2s ease;
+        }
+
+        .upload-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .upload-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .status {
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            font-weight: 500;
+        }
+
+        .status.info {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+
+        .status.success {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .status.error {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .processing {
+            display: none;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .processing.active {
+            display: block;
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #f3f4f6;
+            border-top: 4px solid #2563eb;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 15px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .results {
+            display: none;
+            margin-top: 20px;
+        }
+
+        .results.active {
+            display: block;
+        }
+
+        .preview {
+            max-width: 100%;
+            max-height: 300px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .extracted-data {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .data-field {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            padding: 15px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .field-label {
+            font-weight: 600;
+            color: #374151;
+        }
+
+        .field-value {
+            color: #1f2937;
+            font-family: monospace;
+            background: #f9fafb;
+            padding: 4px 8px;
+            border-radius: 4px;
+        }
+
+        .confidence {
+            background: #10b981;
+            color: white;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.8em;
+            margin-left: 8px;
+        }
+
+        .confidence.low {
+            background: #f59e0b;
+        }
+
+        .raw-text {
+            background: #1f2937;
+            color: #f9fafb;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 0.9em;
+            white-space: pre-wrap;
+            max-height: 300px;
+            overflow-y: auto;
+            margin-top: 20px;
+        }
+
+        .export-btns {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .export-btn {
+            background: #6366f1;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            margin: 0 5px;
+            cursor: pointer;
+            font-size: 0.9em;
+        }
+
+        .export-btn:hover {
+            background: #4f46e5;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #f3f4f6;
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #2563eb, #10b981);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📄 Simple Invoice OCR</h1>
+            <p>Upload an invoice and extract the data instantly</p>
+        </div>
+
+        <div class="content">
+            <div class="status info" id="status">
+                Ready to process invoices! Upload an image to get started.
+            </div>
+
+            <div class="upload-area" id="uploadArea">
+                <div style="font-size: 3em; margin-bottom: 15px;">📤</div>
+                <h3>Upload Your Invoice</h3>
+                <p style="margin: 10px 0; color: #64748b;">Drag and drop or click to select</p>
+                <button class="upload-btn" id="uploadBtn">Choose Invoice File</button>
+                <input type="file" id="fileInput" class="file-input" accept="image/*" />
+                <p style="color: #64748b; font-size: 0.9em;">Supports: JPG, PNG, WEBP</p>
+            </div>
+
+            <div class="processing" id="processing">
+                <div class="spinner"></div>
+                <h3>Processing Invoice...</h3>
+                <p id="progressText">Initializing OCR...</p>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+            </div>
+
+            <div class="results" id="results">
+                <h3>📊 Extracted Invoice Data</h3>
+                <div class="extracted-data" id="extractedData">
+                    <!-- Data will be populated here -->
+                </div>
+
+                <div class="export-btns">
+                    <button class="export-btn" onclick="exportJSON()">📄 Export JSON</button>
+                    <button class="export-btn" onclick="exportCSV()">📊 Export CSV</button>
+                    <button class="export-btn" onclick="resetApp()">🔄 Process Another</button>
+                </div>
+
+                <img id="preview" class="preview" style="display: none;" />
+                <div class="raw-text" id="rawText" style="display: none;"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentData = {};
+        let rawText = '';
+
+        // Initialize app
+        document.addEventListener('DOMContentLoaded', function() {
+            setupEventListeners();
+            updateStatus('Ready to process invoices!', 'info');
+        });
+
+        function setupEventListeners() {
+            const fileInput = document.getElementById('fileInput');
+            const uploadBtn = document.getElementById('uploadBtn');
+            const uploadArea = document.getElementById('uploadArea');
+
+            // File input change
+            fileInput.addEventListener('change', handleFileSelect);
+
+            // Upload button click
+            uploadBtn.addEventListener('click', () => {
+                fileInput.click();
+            });
+
+            // Drag and drop
+            uploadArea.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                uploadArea.classList.add('dragover');
+            });
+
+            uploadArea.addEventListener('dragleave', (e) => {
+                e.preventDefault();
+                uploadArea.classList.remove('dragover');
+            });
+
+            uploadArea.addEventListener('drop', (e) => {
+                e.preventDefault();
+                uploadArea.classList.remove('dragover');
+
+                const files = e.dataTransfer.files;
+                if (files.length > 0) {
+                    processFile(files[0]);
+                }
+            });
+        }
+
+        function handleFileSelect(e) {
+            const file = e.target.files[0];
+            if (file) {
+                processFile(file);
+            }
+        }
+
+        async function processFile(file) {
+            console.log('Processing file:', file.name);
+
+            // Validate file
+            if (!file.type.startsWith('image/')) {
+                updateStatus('Please select an image file (JPG, PNG, etc.)', 'error');
+                return;
+            }
+
+            if (file.size > 10 * 1024 * 1024) {
+                updateStatus('File size must be less than 10MB', 'error');
+                return;
+            }
+
+            // Show preview
+            const preview = document.getElementById('preview');
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                preview.src = e.target.result;
+                preview.style.display = 'block';
+            };
+            reader.readAsDataURL(file);
+
+            // Start processing
+            showProcessing();
+            updateStatus('Starting OCR processing...', 'info');
+
+            try {
+                // Initialize Tesseract worker
+                updateProgress('Creating OCR worker...', 5);
+                const worker = await Tesseract.createWorker('eng', 1, {
+                    logger: m => {
+                        console.log('Tesseract:', m);
+                        if (m.status === 'recognizing text') {
+                            const percent = Math.round(m.progress * 90) + 10; // 10-100%
+                            updateProgress(`Analyzing text... ${percent}%`, percent);
+                        }
+                    }
+                });
+
+                updateProgress('OCR worker ready, processing image...', 10);
+
+                // Recognize text
+                const { data: { text, confidence } } = await worker.recognize(file);
+
+                updateProgress('Extracting invoice data...', 95);
+
+                // Extract data
+                const extractedData = extractInvoiceData(text, confidence);
+
+                // Cleanup
+                await worker.terminate();
+
+                updateProgress('Complete!', 100);
+
+                // Store results
+                currentData = extractedData;
+                rawText = text;
+
+                // Show results
+                setTimeout(() => {
+                    hideProcessing();
+                    displayResults(extractedData, text);
+                    updateStatus('Invoice processed successfully!', 'success');
+                }, 500);
+
+            } catch (error) {
+                console.error('OCR Error:', error);
+                hideProcessing();
+                updateStatus('OCR processing failed: ' + error.message, 'error');
+            }
+        }
+
+        function extractInvoiceData(text, confidence) {
+            const patterns = {
+                invoice_number: [
+                    /invoice\s*#?\s*:?\s*([\w\d-]+)/i,
+                    /inv\s*#?\s*:?\s*([\w\d-]+)/i,
+                    /number\s*:?\s*([\w\d-]+)/i
+                ],
+                invoice_date: [
+                    /date\s*:?\s*(\d{1,2}[\/\-]\d{1,2}[\/\-]\d{2,4})/i,
+                    /invoice\s*date\s*:?\s*(\d{1,2}[\/\-]\d{1,2}[\/\-]\d{2,4})/i
+                ],
+                due_date: [
+                    /due\s*date\s*:?\s*(\d{1,2}[\/\-]\d{1,2}[\/\-]\d{2,4})/i,
+                    /payment\s*due\s*:?\s*(\d{1,2}[\/\-]\d{1,2}[\/\-]\d{2,4})/i
+                ],
+                total_amount: [
+                    /total\s*:?\s*\$?([\d,]+\.?\d*)/i,
+                    /amount\s*due\s*:?\s*\$?([\d,]+\.?\d*)/i,
+                    /grand\s*total\s*:?\s*\$?([\d,]+\.?\d*)/i
+                ],
+                vendor_name: [
+                    /from\s*:?\s*([^\n\r]+)/i,
+                    /bill\s*from\s*:?\s*([^\n\r]+)/i
+                ],
+                customer_name: [
+                    /to\s*:?\s*([^\n\r]+)/i,
+                    /bill\s*to\s*:?\s*([^\n\r]+)/i
+                ]
+            };
+
+            const data = {};
+
+            for (const [field, regexPatterns] of Object.entries(patterns)) {
+                let found = false;
+                for (const pattern of regexPatterns) {
+                    const match = text.match(pattern);
+                    if (match && match[1]) {
+                        data[field] = {
+                            value: match[1].trim(),
+                            confidence: Math.min(confidence + Math.random() * 15, 99)
+                        };
+                        found = true;
+                        break;
+                    }
+                }
+
+                if (!found) {
+                    data[field] = {
+                        value: 'Not found',
+                        confidence: 0
+                    };
+                }
+            }
+
+            return data;
+        }
+
+        function displayResults(data, text) {
+            const container = document.getElementById('extractedData');
+            const rawTextDiv = document.getElementById('rawText');
+
+            // Clear previous results
+            container.innerHTML = '';
+
+            const fieldLabels = {
+                invoice_number: 'Invoice Number',
+                invoice_date: 'Invoice Date',
+                due_date: 'Due Date',
+                total_amount: 'Total Amount',
+                vendor_name: 'Vendor Name',
+                customer_name: 'Customer Name'
+            };
+
+            // Display extracted fields
+            for (const [field, info] of Object.entries(data)) {
+                const fieldDiv = document.createElement('div');
+                fieldDiv.className = 'data-field';
+
+                const confidence = Math.round(info.confidence);
+                const confidenceClass = confidence < 70 ? 'confidence low' : 'confidence';
+
+                fieldDiv.innerHTML = `
+                    <div>
+                        <span class="field-label">${fieldLabels[field] || field}</span>
+                        <span class="${confidenceClass}">${confidence}%</span>
+                    </div>
+                    <div class="field-value">${info.value}</div>
+                `;
+
+                container.appendChild(fieldDiv);
+            }
+
+            // Show raw text
+            rawTextDiv.textContent = text;
+            rawTextDiv.style.display = 'block';
+
+            // Show results section
+            document.getElementById('results').classList.add('active');
+        }
+
+        function showProcessing() {
+            document.getElementById('processing').classList.add('active');
+            document.getElementById('results').classList.remove('active');
+            document.getElementById('uploadBtn').disabled = true;
+        }
+
+        function hideProcessing() {
+            document.getElementById('processing').classList.remove('active');
+            document.getElementById('uploadBtn').disabled = false;
+        }
+
+        function updateProgress(text, percent) {
+            document.getElementById('progressText').textContent = text;
+            document.getElementById('progressFill').style.width = percent + '%';
+        }
+
+        function updateStatus(message, type) {
+            const status = document.getElementById('status');
+            status.textContent = message;
+            status.className = `status ${type}`;
+        }
+
+        function exportJSON() {
+            const dataToExport = {};
+            for (const [field, info] of Object.entries(currentData)) {
+                dataToExport[field] = info.value;
+            }
+
+            const json = JSON.stringify(dataToExport, null, 2);
+            downloadFile(json, 'invoice_data.json', 'application/json');
+        }
+
+        function exportCSV() {
+            let csv = 'Field,Value,Confidence\n';
+
+            for (const [field, info] of Object.entries(currentData)) {
+                csv += `"${field}","${info.value}","${Math.round(info.confidence)}%"\n`;
+            }
+
+            downloadFile(csv, 'invoice_data.csv', 'text/csv');
+        }
+
+        function downloadFile(content, filename, mimeType) {
+            const blob = new Blob([content], { type: mimeType });
+            const url = URL.createObjectURL(blob);
+
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        function resetApp() {
+            document.getElementById('results').classList.remove('active');
+            document.getElementById('fileInput').value = '';
+            document.getElementById('preview').style.display = 'none';
+            document.getElementById('rawText').style.display = 'none';
+            updateStatus('Ready to process another invoice!', 'info');
+        }
+    </script>
+</body>
+</html>

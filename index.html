@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Humzah Chowdry - Graduate Software Engineer & Product Owner</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Custom Cursor -->
+    <div class="cursor" id="cursor">
+        <div class="cursor-inner">
+            <span class="cursor-text"></span>
+        </div>
+    </div>
+    <div class="cursor-trail" id="cursorTrail"></div>
+
+    <!-- Navigation -->
+    <nav class="nav" id="nav">
+        <div class="nav-brand">
+            <span class="nav-logo">HC</span>
+        </div>
+        <div class="nav-links">
+            <a href="#home" class="nav-link" data-cursor="click">Home</a>
+            <a href="#about" class="nav-link" data-cursor="click">About</a>
+            <a href="#projects" class="nav-link" data-cursor="click">Projects</a>
+            <a href="#skills" class="nav-link" data-cursor="click">Skills</a>
+            <a href="#contact" class="nav-link" data-cursor="click">Contact</a>
+        </div>
+        <div class="nav-toggle" id="navToggle" data-cursor="click">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-background">
+            <div class="floating-element" data-speed="0.5"></div>
+            <div class="floating-element" data-speed="0.8"></div>
+            <div class="floating-element" data-speed="0.3"></div>
+            <div class="particle-container" id="particles"></div>
+        </div>
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1 class="hero-title">
+                    <span class="typing-text" id="typingText">Humzah Chowdry</span>
+                    <span class="cursor-blink">|</span>
+                </h1>
+                <h2 class="hero-subtitle">Graduate Software Engineer & Product Owner</h2>
+                <p class="hero-description">Turning ideas into robust products with code and creativity</p>
+                <div class="hero-buttons">
+                    <button class="btn btn--primary hero-btn" data-cursor="arrow">
+                        <span>View My Work</span>
+                        <i class="fas fa-rocket"></i>
+                    </button>
+                    <button class="btn btn--outline hero-btn" data-cursor="arrow">
+                        <span>Get In Touch</span>
+                        <i class="fas fa-envelope"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="hero-avatar" data-cursor="view">
+                    <div class="avatar-glow"></div>
+                    <img src="https://user-gen-media-assets.s3.amazonaws.com/gpt4o_images/72a13de7-6c47-4495-87dc-001a4bd7ddd2.png" alt="Humzah Chowdry" class="avatar-image">
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator" data-cursor="click">
+            <div class="scroll-mouse">
+                <div class="scroll-wheel"></div>
+            </div>
+            <span>Scroll Down</span>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">About Me</h2>
+                <div class="section-subtitle">Tech-driven collaborator passionate about products</div>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>I'm a Computer Science graduate based in London with a passion for building innovative digital systems and user-focused products. My strengths include frontend and backend development, feature delivery, automation, and product ownership. I enjoy collaborating with teams to solve real problems and bring new ideas to life.</p>
+                    <div class="about-stats">
+                        <div class="stat-item" data-cursor="hover">
+                            <div class="stat-number" data-target="10">0</div>
+                            <div class="stat-label">Projects Completed</div>
+                        </div>
+                        <div class="stat-item" data-cursor="hover">
+                            <div class="stat-number" data-target="2">0</div>
+                            <div class="stat-label">Years Experience</div>
+                        </div>
+                        <div class="stat-item" data-cursor="hover">
+                            <div class="stat-number" data-target="20">0</div>
+                            <div class="stat-label">Team Members Supported</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-visual">
+                    <div class="skill-bubbles">
+                        <div class="skill-bubble" data-skill="JavaScript" data-cursor="hover"></div>
+                        <div class="skill-bubble" data-skill="React" data-cursor="hover"></div>
+                        <div class="skill-bubble" data-skill="TypeScript" data-cursor="hover"></div>
+                        <div class="skill-bubble" data-skill="Python" data-cursor="hover"></div>
+                        <div class="skill-bubble" data-skill="API Dev" data-cursor="hover"></div>
+                        <div class="skill-bubble" data-skill="Agile" data-cursor="hover"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects">
+        <section id="dataVisualisations" class="projects">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title">Data Consultant Projects</h2>
+            <div class="section-subtitle">Analytical projects and dashboards</div>
+        </div>
+        <div class="projects-grid" id="dataVisualisationsGrid">
+            <!-- Data Visualisation projects will be loaded here -->
+        </div>
+    </div>
+</section>
+
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Featured Projects</h2>
+                <div class="section-subtitle">Selected work from university, training, and independent study</div>
+            </div>
+            
+            <div class="projects-grid" id="projectsGrid">
+                <div class="project-card">
+                    <h3>Football Match Outcome Predictor (Python)</h3>
+                    <p>Developed a statistical model using Python and Pandas to predict outcomes for European and South American football leagues. Incorporated historic datasets and achieved solid predictive accuracy through feature engineering and machine learning.</p>
+                </div>
+                <div class="project-card">
+                    <h3>Collaborative Sports Data Analysis</h3>
+                    <p>Worked with a team to research football leagues, analyse match data, and refine predictive models for sports betting and strategy development. Presented findings to mentors and applied data visualisation techniques in Jupyter Notebooks.</p>
+                </div>
+                <div class="project-card">
+                    <h3>IT Process Automation Scripts</h3>
+                    <p>Produced automation scripts (Python, Bash) for routine IT support tasks—provisioning devices, user onboarding, and system health monitoring—streamlining workflows and reducing manual workload in small business environments.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="skills">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Skills & Technologies</h2>
+                <div class="section-subtitle">Technical strengths from coursework and real projects</div>
+            </div>
+            <div class="skills-content">
+                <div class="skills-categories">
+                    <div class="skill-category" data-category="all" data-cursor="click">All</div>
+                    <div class="skill-category" data-category="frontend" data-cursor="click">Frontend</div>
+                    <div class="skill-category" data-category="backend" data-cursor="click">Backend</div>
+                    <div class="skill-category" data-category="product" data-cursor="click">Product</div>
+                </div>
+                <div class="skills-grid" id="skillsGrid">
+                    <div class="skill-item frontend">React</div>
+                    <div class="skill-item frontend">TypeScript</div>
+                    <div class="skill-item frontend">JavaScript (ES6+)</div>
+                    <div class="skill-item backend">Python</div>
+                    <div class="skill-item backend">Node.js</div>
+                    <div class="skill-item backend">PostgreSQL</div>
+                    <div class="skill-item product">Product Management</div>
+                    <div class="skill-item product">Agile / Scrum</div>
+                    <div class="skill-item backend">API Development</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Timeline -->
+    <section id="experience" class="experience">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Experience Journey</h2>
+                <div class="section-subtitle">Professional timeline and hands-on experience</div>
+            </div>
+            <div class="timeline">
+                <div class="timeline-item" data-cursor="hover">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">2024</div>
+                        <h4>Data Consultant Training (Rockbourne)</h4>
+                        <div class="timeline-company">Rockbourne Technology</div>
+                        <p>Completed an intensive programme focused on data consulting, analytics, and client communication. Produced client-ready reports, delivered presentations, and learned best practices in analysing business requirements and presenting insights.</p>
+                    </div>
+                </div>
+                <div class="timeline-item" data-cursor="hover">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">2023 - 2025</div>
+                        <h4>Technical Operations & Events Assistant</h4>
+                        <div class="timeline-company">FLVRS Café & Lounge, London</div>
+                        <p>Provided technical and customer support; managed event tech setup and documentation; ensured reliability in a dynamic team environment.</p>
+                    </div>
+                </div>
+                <div class="timeline-item" data-cursor="hover">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">2022 - 2023</div>
+                        <h4>University Project Lead</h4>
+                        <div class="timeline-company">City, University of London</div>
+                        <p>Delivered multiple course projects in React, Python, and Java. Led team coordination and adopted Agile methods for technical delivery.</p>
+                    </div>
+                </div>
+                <div class="timeline-item" data-cursor="hover">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">2020 - 2022</div>
+                        <h4>Student Volunteer</h4>
+                        <div class="timeline-company">Digital Mentoring Programs</div>
+                        <p>Supported onboarding and learning for peers and community members. Facilitated digital literacy workshops and troubleshooting sessions.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Let's Work Together</h2>
+                <div class="section-subtitle">Ready to bring your ideas to life</div>
+            </div>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>Get in touch</h3>
+                    <p>I'm always excited to work on new projects and collaborate with amazing people.</p>
+                    <div class="contact-details">
+                        <div class="contact-item" data-cursor="click">
+                            <i class="fas fa-envelope"></i>
+                            <span>Humzah.Chowdry@outlook.com</span>
+                        </div>
+                        <div class="contact-item" data-cursor="click">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>London, UK</span>
+                        </div>
+                    </div>
+                    <div class="social-links">
+                        <a href="https://github.com/[your-github-username]" class="social-link" data-cursor="click" target="_blank">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="https://linkedin.com/in/[your-linkedin-profile]" class="social-link" data-cursor="click" target="_blank">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <!-- Add Twitter if you use it -->
+                    </div>
+                </div>
+                <form class="contact-form" id="contactForm">
+                    <div class="form-group">
+                        <input type="text" id="name" class="form-control" placeholder="Your Name" required data-cursor="text">
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="email" class="form-control" placeholder="Your Email" required data-cursor="text">
+                    </div>
+                    <div class="form-group">
+                        <textarea id="message" class="form-control" placeholder="Your Message" rows="5" required data-cursor="text"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn--primary btn--full-width" data-cursor="arrow">
+                        <span>Send Message</span>
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2025 Humzah Chowdry. Designed & Built with ❤️</p>
+                <div class="footer-links">
+                    <a href="#privacy" data-cursor="click">Privacy</a>
+                    <a href="#terms" data-cursor="click">Terms</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>

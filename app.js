@@ -48,12 +48,12 @@ class SickPortfolio {
                 category: "graphics",
                 description: "Created interactive animations using Processing framework, focusing on visual effects and user interaction to demonstrate creative coding principles.",
                 technologies: ["Processing", "Java"],
-                demo: "",
-                github: "https://github.com/yourusername/processing-animation",
+                demo: "https://humzahac.github.io/forest-Animation-Project/",
+                github: "https://github.com/HumzahAC/forst-animation-project",
                 stats: {
                     "Frames": "2000+",
                     "Animations": "5",
-                    "User Interactions": "Multiple"
+                    "Awards": "Visually Stunning"
                 },
                 icon: "🎨"
             },
@@ -62,13 +62,13 @@ class SickPortfolio {
                 title: "Showcats NFT Generator",
                 category: "blockchain",
                 description: "Developed an NFT generator web app that creates unique cat-themed collectibles using React and blockchain integration for minting on Ethereum.",
-                technologies: ["React", "Ethereum", "Web3.js", "Node.js"],
-                demo: "",
-                github: "https://github.com/yourusername/showcats-nft-generator",
+                technologies: ["Python", "Jupyter Notebook"],
+                demo: "https://humzahac.github.io/nft-generator-showcats/",
+                github: "https://github.com/HumzahAC/nft-generator-showcats",
                 stats: {
                     "NFTs Generated": "1000+",
-                    "Users": "500+",
-                    "Smart Contracts": "Deployed"
+                    "Variations": "1,000,000+",
+                    "Host": "Opensea"
                 },
                 icon: "🐱"
             },
@@ -77,12 +77,12 @@ class SickPortfolio {
                 title: "Carway Website",
                 category: "web",
                 description: "Designed and developed the Carway company website with responsive layout, custom features, and SEO optimization using modern frontend technologies.",
-                technologies: ["React", "TypeScript", "CSS", "SEO"],
-                demo: "https://carway.example.com",
-                github: "https://github.com/yourusername/carway-website",
+                technologies: ["PHP", "HTML", "CSS", "JAvaScript"],
+                demo: "https://humzahac.github.io/carway-website/",
+                github: "https://github.com/HumzahAC/carway-website",
                 stats: {
                     "Pages": "10+",
-                    "Visitors": "5,000+ monthly",
+                    "Grade": "First",
                     "Performance Score": "95%"
                 },
                 icon: "🚗"
@@ -93,12 +93,12 @@ class SickPortfolio {
                 category: "web",
                 description: "Built the Bidlow auction platform website with end-to-end frontend and backend integration to support live bidding and user account management.",
                 technologies: ["React", "Node.js", "MongoDB", "Express"],
-                demo: "https://bidlow.example.com",
-                github: "https://github.com/yourusername/bidlow-website",
+                demo: "https://humzahac.github.io/bidlow-website/",
+                github: "https://github.com/HumzahAC/bidlow-website",
                 stats: {
                     "Active Auctions": "50+",
-                    "Users": "2000+",
-                    "Transactions": "10,000+"
+                    "Listing": "50+",
+                    "Features": "API integrations"
                 },
                 icon: "🔨"
             }
@@ -108,42 +108,27 @@ class SickPortfolio {
         this.dataVisualisations = [
             {
                 id: 1,
-                title: "Diabetes Database Analysis",
-                category: "data",
-                description: "Analyzed and visualized diabetes health data using Python and Power BI to uncover key trends and predictive factors affecting patient outcomes.",
-                technologies: ["Python", "Pandas", "Power BI", "Matplotlib"],
-                demo: "",
-                github: "https://github.com/yourusername/diabetes-database-analysis",
-                stats: {
-                    "Records Processed": "10,000+",
-                    "Dashboards Created": "3",
-                    "Predictive Models": "2"
-                },
-                icon: "🩺"
-            },
-            {
-                id: 2,
                 title: "Python Game Development",
                 category: "game",
                 description: "Developed an interactive Python game incorporating GUI elements and logic design, showcasing programming skills and user experience focus.",
                 technologies: ["Python", "Tkinter", "Pygame"],
-                demo: "",
-                github: "https://github.com/yourusername/python-game",
+                demo: "https://humzahac.github.io/python-game/",
+                github: "https://github.com/HumzahAC/python-game",
                 stats: {
                     "Levels": "5",
-                    "Players": "100+",
+                    "Dificulty": "Challenging",
                     "Features": "Score tracking, animations"
                 },
                 icon: "🎮"
             },
             {
-                id: 3,
+                id: 2,
                 title: "Power BI Dashboard for Site Selection",
                 category: "data",
                 description: "Created a Power BI dashboard to analyze and visualize demographic and geographic data to identify viable locations for new business development.",
                 technologies: ["Power BI", "Excel", "SQL"],
-                demo: "",
-                github: "https://github.com/yourusername/powerbi-site-selection",
+                demo: "https://humzahac.github.io/powerbi-showcase/",
+                github: "https://github.com/yourusername/powerbi-showcase",
                 stats: {
                     "Data Sources": "5",
                     "Visuals": "10+",
@@ -159,9 +144,9 @@ class SickPortfolio {
             { name: "JavaScript", level: 85, category: "frontend", icon: "fab fa-js-square", color: "#f7df1e" },
             { name: "React", level: 80, category: "frontend", icon: "fab fa-react", color: "#61dafb" },
             { name: "SQL", level: 75, category: "backend", icon: "fas fa-database", color: "#e38c00" },
-            { name: "Product Ownership", level: 80, category: "product", icon: "fas fa-user-tie", color: "#3136b7" },
+            { name: "PHP", level: 80, category: "product", icon: "fas fa-user-tie", color: "#3136b7" },
             { name: "Agile/Scrum", level: 78, category: "product", icon: "fas fa-gavel", color: "#ff7e5f" },
-            { name: "Bash", level: 70, category: "automation", icon: "fas fa-terminal", color: "#232326" }
+            { name: "Power BI", level: 70, category: "automation", icon: "fas fa-terminal", color: "#232326" }
         ];
     }
 

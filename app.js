@@ -48,7 +48,7 @@ class SickPortfolio {
                 category: "graphics",
                 description: "Created interactive animations using Processing framework, focusing on visual effects and user interaction to demonstrate creative coding principles.",
                 technologies: ["Processing", "Java"],
-                demo: "https://humzahac.github.io/forest-Animation-Project/",
+                demo: "https://humzahac.github.io/forest-animation-project/",
                 github: "https://github.com/HumzahAC/forst-animation-project",
                 stats: {
                     "Frames": "2000+",
